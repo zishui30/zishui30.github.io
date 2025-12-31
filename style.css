@@ -88,13 +88,13 @@ body::after {
     display: none;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
 }
 
 /* 放大后的图片样式 */
 .big-img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 95%;
+    max-height: 80%;
     border-radius: 12px;
     transform: scale(0.8);
     transition: transform 0.3s ease;
@@ -476,53 +476,134 @@ body::after {
     to { transform: rotate(5deg); }
 }
 
-/* 响应式布局：适配手机端（精细优化） */
+/* 手机端精细适配（针对320px-768px手机屏幕，解决错位/显示不全问题） */
 @media (max-width: 768px) {
+    /* 头部样式适配：缩小字体，减少内边距，避免溢出 */
     .main-title {
-        font-size: 28px;
+        font-size: 24px; /* 进一步缩小标题，适配小屏幕 */
+        line-height: 1.3;
     }
     .sub-title {
-        font-size: 18px;
+        font-size: 16px;
     }
     .new-year-wish {
-        font-size: 20px;
+        font-size: 18px;
     }
+    .header {
+        padding: 25px 0; /* 减少上下内边距，避免头部过高 */
+        margin-bottom: 40px;
+    }
+
+    /* 板块标题适配：缩小字体，减少间距 */
     .section-title {
-        font-size: 24px;
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+    .section-title::after {
+        width: 60px; /* 缩短装饰线，更适配手机 */
+        height: 2px;
+    }
+
+    /* 时间轴卡片适配：100%宽度，优化间距，避免左右留白 */
+    .timeline-list {
+        padding: 0 10px; /* 减少左右内边距 */
+    }
+    .timeline-item {
+        margin-bottom: 40px; /* 减少卡片间距，避免页面过长 */
     }
     .timeline-card {
-        width: 100%;
-        max-width: none;
+        width: 100% !important; /* 强制100%宽度，填满屏幕 */
+        max-width: none !important;
     }
+    .timeline-date {
+        font-size: 17px;
+        padding: 8px 16px; /* 缩小日期按钮，更精致 */
+        margin-bottom: 15px;
+    }
+
+    /* 图片适配：降低高度，避免图片过高占满屏幕 */
     .card-img {
-        height: 200px;
+        height: 180px !important; /* 手机端图片高度优化，适配竖屏 */
+        object-fit: cover; /* 确保图片裁剪合理，不拉伸 */
     }
+
+    /* 卡片描述适配：缩小字体，减少内边距，提高可读性 */
     .card-desc {
-        font-size: 16px;
-        padding: 18px;
+        font-size: 15px;
+        padding: 15px; /* 减少内边距，避免文字拥挤 */
+        line-height: 1.7;
+    }
+
+    /* 100件小事适配：强制单列显示，避免多列错位 */
+    .small-things {
+        margin: 0 auto 50px;
+        padding: 0 10px;
     }
     .things-list {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
+        grid-template-columns: 1fr !important; /* 强制单列，核心解决手机多列错位问题 */
+        gap: 12px; /* 减少列表间距 */
+        padding: 0;
+    }
+    .thing-item {
+        font-size: 15px;
+        padding: 12px;
+    }
+    .load-more {
+        padding: 10px 25px;
+        font-size: 16px;
+    }
+
+    /* 告白语录&新年惊喜适配：减少内边距，缩小字体 */
+    .confession, .new-year-surprise {
+        margin: 0 auto 50px;
         padding: 0 10px;
     }
     .confession-content {
-        font-size: 17px;
-        padding: 25px;
+        font-size: 16px;
+        padding: 20px; /* 大幅减少内边距，避免页面过长 */
+        line-height: 2;
+    }
+    .unlock-btn {
+        padding: 12px 28px;
+        font-size: 16px;
     }
     .surprise-content p {
-        font-size: 17px;
+        font-size: 16px;
+        line-height: 2;
     }
+    .surprise-content > div {
+        padding: 15px;
+    }
+
+    /* 背景音乐按钮适配：缩小尺寸，调整位置，避免遮挡内容 */
     .music-btn {
-        bottom: 25px;
-        right: 25px;
-        padding: 10px 18px;
-        font-size: 14px;
+        bottom: 20px;
+        right: 20px;
+        padding: 8px 15px;
+        font-size: 13px;
+        border-radius: 20px; /* 缩小圆角，更适配手机 */
+    }
+
+    /* 图片放大遮罩层适配：优化手机端触摸体验，避免放大后溢出 */
+    .img-mask {
+        padding: 15px; /* 减少内边距，让图片显示更大 */
+    }
+    .big-img {
+        max-width: 95%; /* 提高手机端图片最大宽度 */
+        max-height: 80%; /* 降低最大高度，避免超出屏幕可视区域 */
     }
 }
 
-@media (max-width: 480px) {
-    .things-list {
-        grid-template-columns: 1fr; /* 手机竖屏单列显示，避免错位 */
+/* 针对小屏手机（如iPhone SE、红米入门机等320px宽度）额外适配 */
+@media (max-width: 375px) {
+    .main-title {
+        font-size: 22px;
+    }
+    .card-img {
+        height: 160px !important; /* 进一步降低图片高度 */
+    }
+    .confession-content {
+        padding: 15px;
+        font-size: 14px;
     }
 }
