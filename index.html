@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 关键：适配手机端，响应式布局 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的100天纪念册 ❤️</title>
+    <!-- 引入CSS样式文件 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 自定义网页图标（可选，替换为你们的合照小图标） -->
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+    <!-- 1. 头部模块：加载动画 + 标题 -->
+    <header class="header">
+        <div class="loading-box" id="loadingBox">
+            <p>正在加载我们的100天回忆...</p>
+            <div class="num-scroll">0</div>
+        </div>
+        <div class="title-box" id="titleBox" style="display: none;">
+            <h1 class="main-title" id="mainTitle">致我的女孩，我们的100天</h1>
+            <p class="sub-title">从初见的欢喜，到朝夕的相伴，100天只是开始</p>
+        </div>
+    </header>
+
+    <!-- 2. 时间轴回忆长廊（核心模块） -->
+    <section class="timeline" id="timeline">
+        <h2 class="section-title">✨ 我们的时光轴</h2>
+        <div class="timeline-list">
+            <!-- 时间节点1： -->
+            <div class="timeline-item">
+                <div class="timeline-date">第1天 · 相遇</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo1.jpg" alt="牵手的照片" class="card-img">
+                    <p class="card-desc">这天在电影院，我第一次见到你，心跳都漏了一拍</p>
+                </div>
+            </div>
+            <!-- 时间节点2： -->
+            <div class="timeline-item">
+                <div class="timeline-date">去到你学校遇见</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo2.jpg" alt="碧水的照片" class="card-img">
+                    <p class="card-desc">你笑起来真的好可爱</p>
+                </div>
+            </div>
+            <!-- 时间节点3： -->
+            <div class="timeline-item">
+                <div class="timeline-date">你发了我照片</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo3.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">很好看</p>
+                </div>
+            </div>
+            <!-- 时间节点4：  -->
+            <div class="timeline-item">
+                <div class="timeline-date">国庆回家送我的手串</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo4.jpg" alt="手串照片" class="card-img">
+                    <p class="card-desc">手串很不错，就是丢了你的</p>
+                </div>
+            </div>
+            <!-- 时间节点5： -->
+            <div class="timeline-item">
+                <div class="timeline-date">我去了丽水，我们第一次两天不见</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo5.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">有你陪体验很不错</p>
+                </div>
+            </div>
+            <!-- 时间节点6： -->
+            <div class="timeline-item">
+                <div class="timeline-date">发我你做的冰糖葫芦</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo6.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">看着很好吃，我什么时候能吃到</p>
+                </div>
+            </div>
+            <!-- 时间节点7： -->
+            <div class="timeline-item">
+                <div class="timeline-date">陪你上自习</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo7.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">还是很好看，给我好好学习</p>
+                </div>
+            </div>
+            <!-- 时间节点8： -->
+            <div class="timeline-item">
+                <div class="timeline-date">我发了工资，一起吃火锅，一起开始干饭之旅</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo8.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">要多吃一点，尤其心情不好的时候</p>
+                </div>
+            </div>
+            <!-- 时间节点9： -->
+            <div class="timeline-item">
+                <div class="timeline-date">去名创优品买了盲盒</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo9.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">这个还不错，运气还行</p>
+                </div>
+            </div>
+            <!-- 时间节点10： -->
+            <div class="timeline-item">
+                <div class="timeline-date">陪你去做指甲</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo10.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">很漂亮，一闪一闪亮晶晶</p>
+                </div>
+            </div>
+            <!-- 时间节点11： -->
+            <div class="timeline-item">
+                <div class="timeline-date">又是在干饭</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo11.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">好吃</p>
+                </div>
+            </div>
+            <!-- 时间节点12： -->
+            <div class="timeline-item">
+                <div class="timeline-date">拍下你逗狗的瞬间</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo12.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">记得玩结束洗手</p>
+                </div>
+            </div>
+            <!-- 时间节点13： -->
+            <div class="timeline-item">
+                <div class="timeline-date">给你正式表白</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo13.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">花很好看，你也一样</p>
+                </div>
+            </div>
+            <!-- 时间节点14： -->
+            <div class="timeline-item">
+                <div class="timeline-date">到了你生日，给你布置生日场景</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo14.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">祝你生日快乐，一直开心</p>
+                </div>
+            </div>
+            <!-- 时间节点15： -->
+            <div class="timeline-item">
+                <div class="timeline-date">晚上去吃海底捞</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo15.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">记得出门戴口罩o</p>
+                </div>
+            </div>
+            <!-- 时间节点16： -->
+            <div class="timeline-item">
+                <div class="timeline-date">生日快乐，来自拍立得的照片</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo16.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">像一个女王一样</p>
+                </div>
+            </div>
+            <!-- 时间节点17： -->
+            <div class="timeline-item">
+                <div class="timeline-date">拍情侣照片</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo17.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">戴着发圈很可爱嘛</p>
+                </div>
+            </div>
+            <!-- 时间节点18： -->
+            <div class="timeline-item">
+                <div class="timeline-date">又是一张情侣照片</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo18.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">蹲着也可爱</p>
+                </div>
+            </div>
+            <!-- 时间节点19： -->
+            <div class="timeline-item">
+                <div class="timeline-date">继续吃，一堆烧烤</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo19.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">独属于我们两个的快乐时光</p>
+                </div>
+            </div>
+            <!-- 时间节点20： -->
+            <div class="timeline-item">
+                <div class="timeline-date">喜欢记录你的瞬间</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo20.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">绝美晚霞</p>
+                </div>
+            </div>
+            <!-- 时间节点21： -->
+            <div class="timeline-item">
+                <div class="timeline-date">去昙华林拍照</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo21.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">下次姿势摆帅一点</p>
+                </div>
+            </div>
+            <!-- 时间节点22： -->
+            <div class="timeline-item">
+                <div class="timeline-date">第一次去东湖</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo22.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">光影交汇的瞬间，成就最美的你</p>
+                </div>
+            </div>
+            <!-- 时间节点23： -->
+            <div class="timeline-item">
+                <div class="timeline-date">在鹦鹉洲的椅子上</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo23.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">侧颜也很好看</p>
+                </div>
+            </div>
+            <!-- 时间节点24： -->
+            <div class="timeline-item">
+                <div class="timeline-date">与大桥合影</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo24.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">这个很温馨</p>
+                </div>
+            </div>
+            <!-- 时间节点25： -->
+            <div class="timeline-item">
+                <div class="timeline-date">去解放公园</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo25.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">突发奇想喂鸽子</p>
+                </div>
+            </div>
+            <!-- 时间节点26： -->
+            <div class="timeline-item">
+                <div class="timeline-date">又一次落日</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo26.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">这个很生动，看我手握太阳</p>
+                </div>
+            </div>
+            <!-- 时间节点27： -->
+            <div class="timeline-item">
+                <div class="timeline-date">第二次来东湖</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo27.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">骑车很快，等等我</p>
+                </div>
+            </div>
+            <!-- 时间节点28： -->
+            <div class="timeline-item">
+                <div class="timeline-date">又又又吃上了</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo28.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">请我吃的兰湘子</p>
+                </div>
+            </div>
+            <!-- 时间节点29： -->
+            <div class="timeline-item">
+                <div class="timeline-date">一起打的钢琴游戏</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo29.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">你比我厉害</p>
+                </div>
+            </div>
+            <!-- 时间节点30： -->
+            <div class="timeline-item">
+                <div class="timeline-date">下班了，你来找我</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo30.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">去吃你喜欢的牛蛙</p>
+                </div>
+            </div>
+            <!-- 时间节点31： -->
+            <div class="timeline-item">
+                <div class="timeline-date">到了我生日</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo31.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">继续吃</p>
+                </div>
+            </div>
+            <!-- 时间节点32： -->
+            <div class="timeline-item">
+                <div class="timeline-date">出门就是惊喜，幸福就在转弯处</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo32.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">出门遇见圣诞树</p>
+                </div>
+            </div>
+            <!-- 时间节点33： -->
+            <div class="timeline-item">
+                <div class="timeline-date">送我的生日礼物</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo33.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">下次记得提前准备好，涂得真多</p>
+                </div>
+            </div>
+            <!-- 时间节点34： -->
+            <div class="timeline-item">
+                <div class="timeline-date">来接我下班，这天平安夜</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo34.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">一起走着很幸福</p>
+                </div>
+            </div>
+            <!-- 时间节点35： -->
+            <div class="timeline-item">
+                <div class="timeline-date">去光谷广场吃火锅</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo35.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">很好吃哈哈哈</p>
+                </div>
+            </div>
+            <!-- 时间节点36： -->
+            <div class="timeline-item">
+                <div class="timeline-date">一个仟吉露比联名蛋糕</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo36.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">答应你得，幸好没去出差</p>
+                </div>
+            </div>
+            <!-- 时间节点37： -->
+            <div class="timeline-item">
+                <div class="timeline-date">去喂猫，一只没找见</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo37.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">要注意身体好好吃饭</p>
+                </div>
+            </div>
+            <!-- 时间节点38： -->
+            <div class="timeline-item">
+                <div class="timeline-date">光谷广场得圣诞范围</div>
+                <div class="timeline-card">
+                    <img src="assets/images/photo38.jpg" alt="照片" class="card-img">
+                    <p class="card-desc">有你在，很好看</p>
+                </div>
+            </div>
+    </section>
+
+    <!-- 3. 小事清单（核心模块） -->
+    <section class="small-things" id="smallThings">
+        <h2 class="section-title">❤️ 我们的一些小事</h2>
+        <div class="things-list" id="thingsList">
+            <!-- 这里先放10条，后续可通过JS加载更多，也可直接手动添加满100条 -->
+            <div class="thing-item">1. 一起吃了早餐</div>
+            <div class="thing-item">2. 一起看了一场电影</div>
+            <div class="thing-item">3. 你陪我熬夜</div>
+            <div class="thing-item">4. 一起去公园散步</div>
+            <div class="thing-item">5. 分享同一杯奶茶</div>
+            <div class="thing-item">6. 一起拍了合照</div>
+            <div class="thing-item">7. 一起体验欢乐</div>
+            <div class="thing-item">8. 一起在深夜去吃饭</div>
+            <div class="thing-item">9. 互相送了小礼物</div>
+            <div class="thing-item">10. 一起完成了一副画</div>
+        </div>
+        <!-- 加载更多按钮 -->
+        <button class="load-more" id="loadMore">加载更多回忆</button>
+    </section>
+
+    <!-- 4. 告白语录模块 -->
+    <section class="confession" id="confession">
+        <h2 class="section-title">💌 想对你说的话</h2>
+        <div class="confession-content" id="confessionContent">
+            亲爱的宝宝，不知不觉我们已经在一起100天了。<br>
+            这100天里，有欢笑，有温暖，有伤心，有期盼，每一个和你相处的瞬间，都成为了我生命中最珍贵的回忆。<br>
+            100天不是终点，而是我们未来无数个日子的起点。<br>
+            我想牵着你的手，一起看遍世间风景，一起去更多的地方，做更美好的事<br>
+            我爱你，不止今天
+             <br>
+    恰逢跨年夜，祝你2026新年快乐，平安喜乐，我们要一起走过更多的新年呀 🎉<br>
+</div>
+        </div>
+    </section>
+
+    <!-- 5. 背景音乐模块 -->
+    <audio id="bgm" src="assets/music/bgm.mp3" loop preload="auto"></audio>
+    <button class="music-btn" id="musicBtn">播放/暂停背景音乐</button>
+
+    <!-- 引入JS交互文件 -->
+    <script src="script.js"></script>
+    <div class="img-mask" id="imgMask">
+    <img src="" alt="放大的照片" class="big-img" id="bigImg">
+</div>
+</body>
+</html>

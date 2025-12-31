@@ -1,0 +1,528 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 页面背景：星空+流星划过动画（跨年氛围拉满） */
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    /* 深色星空渐变背景 */
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: #fff;
+    padding: 15px 10px;
+    line-height: 1.7;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+/* 星星闪烁动画 */
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(2px 2px at 20px 30px, #fff, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 50px 160px, #fff, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(255,255,255,0)),
+        radial-gradient(2px 2px at 160px 120px, #fff, rgba(255,255,255,0)),
+        radial-gradient(3px 3px at 200px 200px, #ffd700, rgba(255,215,0,0)),
+        radial-gradient(2px 2px at 250px 150px, #ffd700, rgba(255,215,0,0));
+    background-repeat: repeat;
+    background-size: 250px 250px;
+    animation: twinkle 5s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 流星划过动画（核心：多个流星随机出现+斜向划过） */
+.meteor {
+    position: absolute;
+    top: -10%;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0), #fff, rgba(255,255,255,0));
+    border-radius: 50%;
+    opacity: 0.8;
+    z-index: -1;
+    pointer-events: none;
+    animation: meteorFall linear infinite;
+}
+
+/* 流星划过关键帧：斜向下移动，逐渐消失 */
+@keyframes meteorFall {
+    0% {
+        transform: translateX(0) translateY(0) rotate(20deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(300px) translateY(200px) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+/* 星星闪烁关键帧 */
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0.3; }
+}
+
+/* 图片放大遮罩层样式（点击放大必备） */
+.img-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 放大后的图片样式 */
+.big-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+/* 图片放大后的过渡效果 */
+.img-mask.active .big-img {
+    transform: scale(1);
+}
+
+/* 头部样式：精致排版+适配星空背景 */
+.header {
+    text-align: center;
+    padding: 40px 0;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.loading-box p {
+    font-size: 22px;
+    margin-bottom: 25px;
+    color: #fff;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.5);
+}
+
+.num-scroll {
+    font-size: 42px;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.main-title {
+    font-size: 36px;
+    color: #fff;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+    /* 打字机动画优化 */
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid #fff;
+    margin: 0 auto;
+    width: 0;
+    animation: typing 3.5s steps(25) forwards, blink 0.8s step-end infinite;
+}
+
+.sub-title {
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.5);
+    margin-bottom: 10px;
+}
+
+/* 新年祝福文字样式（红金闪烁，适配星空跨年氛围） */
+.new-year-wish {
+    font-size: 22px;
+    color: #ffd700;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+    animation: flash 2.5s ease infinite alternate;
+}
+
+@keyframes flash {
+    from { color: #ffd700; }
+    to { color: #ff0000; }
+}
+
+/* 打字机动画优化 */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: #fff; }
+}
+
+/* 通用板块标题：增加装饰线+适配星空 */
+.section-title {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #fff;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: #ffd700;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* 时间轴样式：移除红线+居中排版 */
+.timeline-list {
+    max-width: 850px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+    z-index: 2;
+}
+
+.timeline-item {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 0 !important;
+    width: 100% !important;
+    z-index: 2;
+}
+
+.timeline-date {
+    font-size: 19px;
+    font-weight: 600;
+    color: #fff;
+    background: #ff4d6d;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+/* 时间轴卡片：优化尺寸+悬浮动效+适配星空 */
+.timeline-card {
+    width: 92%;
+    max-width: 420px;
+    background: rgba(30, 30, 40, 0.8); /* 深色半透明卡片 */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.4s ease;
+    z-index: 2;
+}
+
+.timeline-card:hover {
+    transform: translateY(-8px); /* 向上悬浮动效 */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+/* 图片样式：统一尺寸+裁剪优化+悬浮放大（可点击标识） */
+.card-img {
+    width: 100%;
+    height: 240px; /* 统一高度，解决图片过大问题 */
+    object-fit: cover; /* 保留主体，裁剪边缘 */
+    border-radius: 12px 12px 0 0;
+    transition: transform 0.5s ease;
+    cursor: pointer; /* 鼠标指针变为手型，提示可点击 */
+}
+
+.timeline-card:hover .card-img {
+    transform: scale(1.03); /* 悬浮轻微放大，突出主体 */
+}
+
+.card-desc {
+    padding: 20px;
+    font-size: 17px;
+    color: #fff; /* 文字白色，适配深色卡片 */
+    line-height: 1.8;
+}
+
+/* 100件小事样式：清晰排版+适配星空 */
+.small-things {
+    max-width: 850px;
+    margin: 0 auto 70px;
+    z-index: 2;
+    position: relative;
+}
+
+.things-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-bottom: 35px;
+    z-index: 2;
+}
+
+.thing-item {
+    background: rgba(30, 30, 40, 0.8); /* 深色半透明 */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.thing-item.active {
+    background: rgba(255, 77, 109, 0.8); /* 点亮状态样式 */
+    color: #fff;
+    box-shadow: 0 5px 12px rgba(255, 77, 109, 0.4);
+    transform: translateY(-3px);
+}
+
+.load-more {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 30px;
+    background: #ff4d6d;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 2;
+    position: relative;
+}
+
+.load-more:hover {
+    background: #ff3355;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+}
+
+/* 告白语录样式：柔和背景+适配星空 */
+.confession {
+    max-width: 850px;
+    margin: 0 auto 70px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+
+.confession-content {
+    background: rgba(30, 30, 40, 0.8); /* 深色半透明 */
+    padding: 35px;
+    border-radius: 15px;
+    font-size: 19px;
+    color: #fff;
+    line-height: 2.2;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    animation: fadeIn 5s ease forwards;
+    opacity: 0;
+    z-index: 2;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 新年惊喜模块样式：适配星空 */
+.new-year-surprise {
+    max-width: 850px;
+    margin: 0 auto 70px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+
+.unlock-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 14px 35px;
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.unlock-btn:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+}
+
+.surprise-content {
+    margin-top: 25px;
+    z-index: 2;
+}
+
+.surprise-content > div {
+    background: rgba(30, 30, 40, 0.8); /* 深色半透明 */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.surprise-content p {
+    font-size: 19px;
+    color: #fff;
+    line-height: 2.2;
+}
+
+/* 背景音乐按钮：简洁样式+悬浮效果 */
+.music-btn {
+    position: fixed;
+    bottom: 35px;
+    right: 35px;
+    padding: 12px 22px;
+    background: #ff4d6d;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    background: #ff3355;
+    transform: translateY(-2px);
+}
+
+/* 按钮点击反馈动画 */
+.btn-click {
+    animation: btnClick 0.3s ease forwards;
+}
+
+@keyframes btnClick {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* 雪花动画（跨年氛围补充） */
+.snowflake {
+    position: absolute;
+    color: #fff;
+    font-size: 12px;
+    opacity: 0.8;
+    user-select: none;
+    z-index: 1;
+    animation: snowfall linear infinite;
+    pointer-events: none;
+}
+
+@keyframes snowfall {
+    0% {
+        top: -10%;
+        transform: translateX(0);
+    }
+    100% {
+        top: 100%;
+        transform: translateX(50px);
+    }
+}
+
+/* 灯笼摇摆动画（可选，跨年氛围） */
+.lantern-box {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 20px;
+    z-index: 2;
+    position: relative;
+}
+
+.lantern {
+    font-size: 40px;
+    animation: swing 2s ease infinite alternate;
+}
+
+.lantern-box .lantern:nth-child(2) {
+    animation-direction: reverse;
+}
+
+@keyframes swing {
+    from { transform: rotate(-5deg); }
+    to { transform: rotate(5deg); }
+}
+
+/* 响应式布局：适配手机端（精细优化） */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 28px;
+    }
+    .sub-title {
+        font-size: 18px;
+    }
+    .new-year-wish {
+        font-size: 20px;
+    }
+    .section-title {
+        font-size: 24px;
+    }
+    .timeline-card {
+        width: 100%;
+        max-width: none;
+    }
+    .card-img {
+        height: 200px;
+    }
+    .card-desc {
+        font-size: 16px;
+        padding: 18px;
+    }
+    .things-list {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        padding: 0 10px;
+    }
+    .confession-content {
+        font-size: 17px;
+        padding: 25px;
+    }
+    .surprise-content p {
+        font-size: 17px;
+    }
+    .music-btn {
+        bottom: 25px;
+        right: 25px;
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .things-list {
+        grid-template-columns: 1fr; /* 手机竖屏单列显示，避免错位 */
+    }
+}
