@@ -1,6 +1,6 @@
-// 网页登录验证逻辑（核心：登录后显示隐藏的网页内容）
+// 网页登录验证逻辑（优化手机端兼容，解决登录失败问题）
 window.onload = function() {
-    // 1. 自定义账号密码（可随意修改）
+    // 1. 自定义账号密码（可随意修改，注意用半角字符）
     const targetUser = "cswqyw"; // 账号
     const targetPwd = "09191030"; // 密码
 
@@ -12,10 +12,15 @@ window.onload = function() {
     const loginError = document.getElementById("loginError");
     const webContent = document.getElementById("webContent"); // 网页内容容器
 
-    // 3. 登录按钮点击事件
-    loginBtn.addEventListener("click", function() {
-        const inputUser = userName.value.trim();
-        const inputPwd = userPwd.value.trim();
+    // 核心优化：提取登录验证逻辑为独立函数，方便多场景调用
+    function doLogin() {
+        // 优化1：强制转换为半角字符 + 过滤首尾空格，解决手机端输入兼容问题
+        const inputUser = userName.value.trim().replace(/[\uFF00-\uFFEF]/g, function(c) {
+            return String.fromCharCode(c.charCodeAt(0) - 65248);
+        });
+        const inputPwd = userPwd.value.trim().replace(/[\uFF00-\uFFEF]/g, function(c) {
+            return String.fromCharCode(c.charCodeAt(0) - 65248);
+        });
 
         // 验证账号密码
         if (inputUser === targetUser && inputPwd === targetPwd) {
@@ -33,13 +38,42 @@ window.onload = function() {
             userName.value = "";
             userPwd.value = "";
         }
-    });
+    }
 
-    // 4. 按回车键触发登录（便捷操作）
+    // 3. 登录按钮点击事件（优化2：确保元素加载完成后绑定，兼容手机端）
+    if (loginBtn) {
+        loginBtn.addEventListener("click", doLogin);
+    }
+
+    // 4. 优化3：兼容手机端软键盘回车事件（多场景监听，确保生效）
+    // 给账号输入框绑定回车事件
+    if (userName) {
+        userName.addEventListener("keydown", function(e) {
+            // 兼容电脑端Enter + 手机端软键盘Enter（keyCode 13是通用回车标识）
+            if (e.key === "Enter" || e.keyCode === 13) {
+                e.preventDefault();
+                userPwd.focus(); // 光标跳转到密码框，提升手机端体验
+            }
+        });
+    }
+
+    // 给密码输入框绑定回车事件（直接触发登录）
+    if (userPwd) {
+        userPwd.addEventListener("keydown", function(e) {
+            if (e.key === "Enter" || e.keyCode === 13) {
+                e.preventDefault();
+                doLogin(); // 触发登录
+            }
+        });
+    }
+
+    // 保留电脑端全局回车事件（不影响电脑端使用）
     document.addEventListener("keydown", function(e) {
-        // 此处快捷键不会与head中的屏蔽代码冲突（仅在登录框生效）
-        if (e.key === "Enter") {
-            loginBtn.click();
+        if (e.key === "Enter" || e.keyCode === 13) {
+            // 仅当登录框可见时触发，避免影响其他功能
+            if (loginMask.style.display !== "none") {
+                doLogin();
+            }
         }
     });
 
