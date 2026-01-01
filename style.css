@@ -598,3 +598,84 @@ body::after {
         font-size: 14px;
     }
 }
+/* 登录验证遮罩层（全屏覆盖，优先显示） */
+.login-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    z-index: 99999; /* 最高层级，覆盖所有内容 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 登录表单容器 */
+.login-form {
+    background: rgba(30, 30, 40, 0.9);
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 380px;
+}
+
+/* 登录标题 */
+.login-title {
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* 输入框样式 */
+.login-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* 输入框聚焦样式 */
+.login-input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(255, 77, 109, 0.4);
+}
+
+/* 登录按钮 */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4d6d;
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.login-btn:hover {
+    background: #ff3355;
+    box-shadow: 0 3px 10px rgba(255, 77, 109, 0.5);
+}
+
+/* 错误提示文字 */
+.login-error {
+    color: #ff4d6d;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+    display: none; /* 默认隐藏 */
+}

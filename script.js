@@ -1,24 +1,60 @@
-// 页面加载完成后再执行所有操作
+// 网页登录验证逻辑（核心：登录后显示隐藏的网页内容）
 window.onload = function() {
-    // 1. 生成流星划过效果
+    // 1. 自定义账号密码（可随意修改）
+    const targetUser = "cswqyw"; // 账号
+    const targetPwd = "09191030"; // 密码
+
+    // 2. 获取登录相关+网页内容容器元素
+    const loginMask = document.getElementById("loginMask");
+    const userName = document.getElementById("userName");
+    const userPwd = document.getElementById("userPwd");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginError = document.getElementById("loginError");
+    const webContent = document.getElementById("webContent"); // 网页内容容器
+
+    // 3. 登录按钮点击事件
+    loginBtn.addEventListener("click", function() {
+        const inputUser = userName.value.trim();
+        const inputPwd = userPwd.value.trim();
+
+        // 验证账号密码
+        if (inputUser === targetUser && inputPwd === targetPwd) {
+            // 验证通过：隐藏登录框 + 显示网页内容
+            loginMask.style.display = "none";
+            webContent.style.display = "block"; // 显示隐藏的网页内容
+        } else {
+            // 验证失败，显示错误提示
+            loginError.style.display = "block";
+            // 3秒后自动隐藏错误提示
+            setTimeout(() => {
+                loginError.style.display = "none";
+            }, 3000);
+            // 清空输入框
+            userName.value = "";
+            userPwd.value = "";
+        }
+    });
+
+    // 4. 按回车键触发登录（便捷操作）
+    document.addEventListener("keydown", function(e) {
+        // 此处快捷键不会与head中的屏蔽代码冲突（仅在登录框生效）
+        if (e.key === "Enter") {
+            loginBtn.click();
+        }
+    });
+
+    // 5. 原有所有功能（无需修改，自动执行）
     createMeteors();
-    // 2. 绑定图片点击放大功能
     bindImgClickZoom();
-    // 3. 修复100件小事点亮交互
     bindSmallThings();
-    // 4. 修复加载更多功能
     bindLoadMore();
-    // 5. 修复背景音乐播放/暂停
     bindMusicBtn();
-    // 6. 修复新年惊喜解锁交互
     bindNewYearSurprise();
-    // 7. 确保雪花动画正常生成
     createSnowflakes();
-    // 8. 确保标题打字机动画正常触发
     initTitleAnimation();
 };
 
-// 1. 生成流星划过效果（随机出现+不同速度/位置）
+// 1. 生成流星划过效果（随机数量+速度+位置）
 function createMeteors() {
     const meteorCount = 8; // 流星数量，可调整
     const body = document.body;
@@ -30,12 +66,12 @@ function createMeteors() {
         meteor.style.left = Math.random() * 50 + '%';
         meteor.style.width = Math.random() * 80 + 50 + 'px'; // 流星长度
         meteor.style.animationDuration = Math.random() * 3 + 2 + 's'; // 划过速度
-        meteor.style.animationDelay = Math.random() * 10 + 's'; // 延迟出现，避免同时划过
+        meteor.style.animationDelay = Math.random() * 10 + 's'; // 延迟出现
         body.appendChild(meteor);
     }
 }
 
-// 2. 图片点击放大功能（核心：点击显示，再次点击/点击遮罩隐藏）
+// 2. 图片点击放大功能（核心：点击显示，遮罩/ESC关闭）
 function bindImgClickZoom() {
     const cardImgs = document.querySelectorAll('.card-img'); // 所有可点击图片
     const imgMask = document.getElementById('imgMask');
@@ -44,27 +80,26 @@ function bindImgClickZoom() {
     // 绑定每张图片的点击事件
     cardImgs.forEach(img => {
         img.addEventListener('click', function() {
-            const imgSrc = this.src; // 获取当前点击图片的地址
-            bigImg.src = imgSrc; // 给放大的图片赋值地址
+            const imgSrc = this.src; // 获取当前点击图片地址
+            bigImg.src = imgSrc; // 给放大图片赋值
             imgMask.style.display = 'flex'; // 显示遮罩层
             setTimeout(() => {
-                imgMask.classList.add('active'); // 添加动画类，实现平滑放大
+                imgMask.classList.add('active'); // 添加动画，平滑放大
             }, 10);
         });
     });
 
     // 点击遮罩层隐藏放大图片
     imgMask.addEventListener('click', function(e) {
-        // 排除点击放大图片本身的情况
         if (e.target === this) {
-            imgMask.classList.remove('active'); // 移除动画类，平滑缩小
+            imgMask.classList.remove('active'); // 平滑缩小
             setTimeout(() => {
                 imgMask.style.display = 'none'; // 隐藏遮罩层
             }, 300);
         }
     });
 
-    // 按ESC键隐藏放大图片（便捷操作）
+    // 按ESC键关闭放大图片
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && imgMask.style.display === 'flex') {
             imgMask.classList.remove('active');
@@ -100,7 +135,7 @@ function bindSmallThings() {
     });
 }
 
-// 5. 加载更多功能
+// 5. 加载更多功能（100件小事追加内容）
 function bindLoadMore() {
     const loadMoreBtn = document.querySelector('.load-more');
     if (!loadMoreBtn) return;
@@ -154,13 +189,13 @@ function bindLoadMore() {
     });
 }
 
-// 6. 背景音乐交互
+// 6. 背景音乐播放/暂停交互
 function bindMusicBtn() {
     const musicBtn = document.querySelector('.music-btn');
     if (!musicBtn) return;
 
     let isPlaying = false;
-    const audio = new Audio('assets/music/bgm.mp3');
+    const audio = new Audio('assets/music/bgm.mp3'); // 背景音乐路径
     audio.loop = true;
     audio.preload = 'metadata';
 
@@ -172,7 +207,7 @@ function bindMusicBtn() {
 
         if (!isPlaying) {
             audio.play().catch(err => {
-                console.log("请手动触发播放（移动端限制）");
+                console.log("请手动触发播放（移动端浏览器限制）");
             });
             this.innerText = "暂停音乐 🎵";
             isPlaying = true;
@@ -184,7 +219,7 @@ function bindMusicBtn() {
     });
 }
 
-// 7. 新年惊喜解锁交互
+// 7. 新年惊喜解锁交互（若你未使用，可忽略，不影响整体功能）
 function bindNewYearSurprise() {
     const unlockBtn = document.getElementById('unlockBtn');
     const surpriseContent = document.getElementById('surpriseContent');
@@ -206,9 +241,9 @@ function bindNewYearSurprise() {
     });
 }
 
-// 8. 雪花动画生成
+// 8. 雪花动画生成（跨年氛围补充）
 function createSnowflakes() {
-    const snowCount = 40;
+    const snowCount = 40; // 雪花数量，可调整
     const body = document.body;
 
     for (let i = 0; i < snowCount; i++) {
